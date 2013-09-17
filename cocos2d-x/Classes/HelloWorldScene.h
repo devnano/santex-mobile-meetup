@@ -40,9 +40,6 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::CCScene* scene();
     
-    // a selector callback
-    void menuCloseCallback(CCObject* pSender);
-    
     // override touche related method...
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     
