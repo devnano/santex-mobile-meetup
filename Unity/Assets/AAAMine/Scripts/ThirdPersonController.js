@@ -139,6 +139,7 @@ function UpdateSmoothedMovementDirection ()
 	// Always orthogonal to the forward vector
 	var right = Vector3(forward.z, 0, -forward.x);
 
+	/* FEDE: mobile joystick input added. */
 	var v:float;
 	var h:float;
 	if (joystick) {
