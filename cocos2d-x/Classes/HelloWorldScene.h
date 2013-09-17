@@ -8,17 +8,23 @@ class HelloWorld : public cocos2d::CCLayer
     // Player sprite
     cocos2d::CCSprite* m_player;
     
+    float m_speed;
+    
     cocos2d::CCActionInterval* getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame);
     
     void addTarget();
 
     void gameLogic(float dt);
     
+    void updatePlayer(float dt);
+    
     void playSwimAnimation();
     
     void playKickAnimation();
     
     const char *randomTargetName();
+    
+    
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
@@ -31,6 +37,8 @@ public:
     
     // override touche related method...
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    
+    void didAccelerate(cocos2d::CCAcceleration* pAccelerationValue);
     
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);

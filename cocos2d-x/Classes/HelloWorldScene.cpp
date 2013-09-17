@@ -8,6 +8,8 @@ const float BCSwimAnimationTime = 0.25;
 const int BCKickAnimationTag = 2;
 const float BCKickAnimationTime = 0.5;
 
+const float BCMaxVelocity = 80.0f;
+
 
 
 CCScene* HelloWorld::scene()
@@ -20,7 +22,7 @@ CCScene* HelloWorld::scene()
 
     // add layer as a child to scene
     scene->addChild(layer);
-
+    
     // return the scene
     return scene;
 }
@@ -105,7 +107,13 @@ bool HelloWorld::init()
     // Enable touches for actions
     this->setTouchEnabled(true);
     
+    this->setAccelerometerEnabled(true);
+    
     this->schedule( schedule_selector(HelloWorld::gameLogic), 1.0 );
+    
+    this->schedule( schedule_selector(HelloWorld::updatePlayer), 0.1);
+    
+    m_speed = 0.0f;
     
     return true;
 }
@@ -125,6 +133,35 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     this->playKickAnimation();
 }
+//#pragma mark BCAccelerometerInput () <UIAccelerometerDelegate>
+void HelloWorld::didAccelerate(CCAcceleration* pAccelerationValue)
+{
+	m_speed = (float)pAccelerationValue->x * BCMaxVelocity;
+}
+
+void HelloWorld::updatePlayer(float dTime)
+{
+    CCPoint position = m_player->getPosition();
+//	if (this->getBottomLeftPointInWorld().x > screenBounds().size.width)
+//		// if it's outside right limit of the screen, make it appear from the left size
+//		this->setPosition(ccp(-getSize().width/2, position->y));
+//	else if (this->getBottomLeftPointInWorld().x + getSize().width < 0)
+//		// if it's outside left limit of the screen, make it appear from the right side
+//		this->setPosition(ccp(screenBounds().size.width + getSize().width/2, getPosition().y));
+//	else {
+		// otherwise perform normal movement
+        CCFiniteTimeAction* move = CCMoveTo::create(0.1,  ccp(position.x + m_speed, position.y));
+        // CCFiniteTimeAction* two = CCCallFunc::create(delegate, selector);
+        // CCSequence* action = CCSequence::createWithTwoActions(one, two);
+        m_player->runAction(move);
+		bool flip = m_speed > 0;
+		if (flip != m_player->isFlipX()) {			
+            m_player->setFlipX(flip);
+        }
+//	}
+}
+
+
 
 void HelloWorld::gameLogic(float dt)
 {
