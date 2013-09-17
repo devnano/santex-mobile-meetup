@@ -82,13 +82,14 @@ private var lastJumpTime = -1.0;
 // the height we jumped from (Used to determine for how long to apply extra jump power after jumping.)
 private var lastJumpStartHeight = 0.0;
 
-
 private var inAirVelocity = Vector3.zero;
 
 private var lastGroundedTime = 0.0;
 
-
 private var isControllable = true;
+
+//FEDE: added to manage the 'mobile joystick'
+var joystick:Joystick;
 
 function Awake ()
 {
@@ -138,8 +139,17 @@ function UpdateSmoothedMovementDirection ()
 	// Always orthogonal to the forward vector
 	var right = Vector3(forward.z, 0, -forward.x);
 
-	var v = Input.GetAxisRaw("Vertical");
-	var h = Input.GetAxisRaw("Horizontal");
+	var v:float;
+	var h:float;
+	if (joystick) {
+		var joystickInput:Vector2 = joystick.GetInput();
+
+		h = joystickInput.x;
+		v = joystickInput.y;
+	} else {
+		v = Input.GetAxisRaw("Vertical");
+		h = Input.GetAxisRaw("Horizontal");
+	}
 
 	// Are we moving backwards or looking backwards
 	if (v < -0.2)
@@ -420,7 +430,13 @@ function GetLockCameraTimer ()
 
 function IsMoving ()  : boolean
 {
-	return Mathf.Abs(Input.GetAxisRaw("Vertical")) + Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5;
+	if (joystick) {
+		var joystickInput:Vector2 = joystick.GetInput();
+
+		return (joystickInput.x != 0 || joystickInput.y != 0);
+	} else {
+		return Mathf.Abs(Input.GetAxisRaw("Vertical")) + Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0.5;
+	}
 }
 
 function HasJumpReachedApex ()
