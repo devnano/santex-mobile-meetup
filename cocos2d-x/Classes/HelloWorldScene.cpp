@@ -2,6 +2,10 @@
 
 USING_NS_CC;
 
+const int BCSwimAnimationTag = 1;
+const float BCSwimAnimationTime = 0.25;
+
+
 CCScene* HelloWorld::scene()
 {
     // 'scene' is an autorelease object
@@ -82,15 +86,20 @@ bool HelloWorld::init()
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("octopus.plist");
     
     // Load the first frame as player default image
-    CCSprite* player =  CCSprite::createWithSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("octopus1.png"));
+    m_player =  CCSprite::createWithSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("octopus1.png"));
     
     
 
     // add the player sprite centered on the obottom of visible area
-    player->setPosition(ccp(origin.x + visibleSize.width/2,
-                                     player->getContentSize().height/2) );
+    m_player->setPosition(ccp(origin.x + visibleSize.width/2,
+                                     m_player->getContentSize().height/2) );
     
-    this->addChild(player);
+    this->addChild(m_player);
+    
+    this->playSwimAnimation();
+    
+    // Enable touches for actions
+    this->setTouchEnabled(true);
     
     return true;
 }
@@ -103,4 +112,53 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+// Get CCActionInterval given a set of frames, duration, animation name...
+CCActionInterval* HelloWorld::getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame)
+{
+	CCArray* frames = new CCArray(len);
+    frames->autorelease();
+    
+    // Buid sprite frames from names and indexes given the location and the len
+    std::string spriteName = "octopus";
+	for(int i = location; i < location + len; ++i) {
+        std::ostringstream oss;
+        oss << i;
+        std::string frameName = spriteName + oss.str() + ".png";
+        CCSpriteFrame* frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName.c_str());
+        frames->addObject(frame);
+	}
+	CCAnimation *animation = CCAnimation::createWithSpriteFrames(frames, duration/frames->count());
+    animation->setRestoreOriginalFrame(restoreOriginalFrame);
+    
+	CCAnimate *animate = CCAnimate::create(animation);
+    
+    
+	CCActionInterval *action = animate;
+	
+	if (pingPong)
+		action = CCSequence::createWithTwoActions(animate, animate->reverse());
+	
+	return action;
+}
+
+void HelloWorld::playSwimAnimation()
+{
+    int location = 1;
+    int length = 3;	
+    bool isWalking = m_player->getActionByTag(BCSwimAnimationTag) != NULL;
+    CCActionInterval* swimAction = NULL;
+	
+	if (!isWalking) {
+        swimAction = this->getAnimateFrameRange(location, length, BCSwimAnimationTime, true, false);
+		swimAction->setTag(BCSwimAnimationTag);
+	} else {
+        // if can't run the swim animation, just wait
+        swimAction = CCDelayTime::create(BCSwimAnimationTime);
+    }
+    
+    // first swim (or wait) and then call the playSwimAnimation selector again to generate a continuous loop...
+    CCSequence* sequence = CCSequence::createWithTwoActions(swimAction, CCCallFunc::create(this, callfunc_selector(HelloWorld::playSwimAnimation)));
+    
+    m_player->runAction(sequence);
 }
