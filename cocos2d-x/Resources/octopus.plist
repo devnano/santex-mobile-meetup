@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>octopus1.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{2, 2}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus2.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{81, 2}, {74, 41}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {74, 41}}</string>
+			<key>sourceSize</key>
+			<string>{74, 41}</string>
+		</dict>
+		<key>octopus3.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{157, 2}, {71, 41}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {71, 41}}</string>
+			<key>sourceSize</key>
+			<string>{71, 41}</string>
+		</dict>
+		<key>octopus4.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{229, 1}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus5.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{307, 1}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus6.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{386, 1}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus7.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{0, 47}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus8.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{80, 47}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus9.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{158, 47}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus10.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{237, 47}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+		<key>octopus11.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{315, 47}, {77, 42}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {77, 42}}</string>
+			<key>sourceSize</key>
+			<string>{77, 42}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>1</integer>
+		<key>size</key>
+		<string>{512, 128}</string>
+	</dict>
+</dict>
+</plist>

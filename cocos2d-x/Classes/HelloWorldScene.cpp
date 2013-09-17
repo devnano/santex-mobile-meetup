@@ -65,13 +65,32 @@ bool HelloWorld::init()
     this->addChild(pLabel, 1);
 
     // add "HelloWorld" splash screen"
-    CCSprite* pSprite = CCSprite::create("HelloWorld.png");
+    CCSprite* pSprite = CCSprite::create("background.png");
 
     // position the sprite on the center of the screen
     pSprite->setPosition(ccp(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
     // add the sprite as a child to this layer
     this->addChild(pSprite, 0);
+    
+    // Create player sprite frames    
+    CCSpriteBatchNode *playerBatchNode = CCSpriteBatchNode::create("octopus.png");
+    
+    this->addChild(playerBatchNode);
+
+    // Save player sprite frames into cache 
+    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("octopus.plist");
+    
+    // Load the first frame as player default image
+    CCSprite* player =  CCSprite::createWithSpriteFrame(CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName("octopus1.png"));
+    
+    
+
+    // add the player sprite centered on the obottom of visible area
+    player->setPosition(ccp(origin.x + visibleSize.width/2,
+                                     player->getContentSize().height/2) );
+    
+    this->addChild(player);
     
     return true;
 }

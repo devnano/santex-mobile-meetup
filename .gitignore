@@ -6,4 +6,6 @@ Unity/Temp
 *.unityproj
 *.sln
 *.userprefs
-
+*xcuserdata
+*DerivedData
+*xcshareddata
