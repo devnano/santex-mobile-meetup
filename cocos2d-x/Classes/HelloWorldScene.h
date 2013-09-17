@@ -10,9 +10,15 @@ class HelloWorld : public cocos2d::CCLayer
     
     cocos2d::CCActionInterval* getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame);
     
+    void addTarget();
+
+    void gameLogic(float dt);
+    
     void playSwimAnimation();
     
     void playKickAnimation();
+    
+    const char *randomTargetName();
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
