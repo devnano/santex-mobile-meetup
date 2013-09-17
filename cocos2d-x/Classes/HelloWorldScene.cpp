@@ -5,6 +5,10 @@ USING_NS_CC;
 const int BCSwimAnimationTag = 1;
 const float BCSwimAnimationTime = 0.25;
 
+const int BCKickAnimationTag = 2;
+const float BCKickAnimationTime = 0.5;
+
+
 
 CCScene* HelloWorld::scene()
 {
@@ -113,6 +117,13 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
     exit(0);
 #endif
 }
+
+
+void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
+{
+    this->playKickAnimation();
+}
+
 // Get CCActionInterval given a set of frames, duration, animation name...
 CCActionInterval* HelloWorld::getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame)
 {
@@ -147,9 +158,12 @@ void HelloWorld::playSwimAnimation()
     int location = 1;
     int length = 3;	
     bool isWalking = m_player->getActionByTag(BCSwimAnimationTag) != NULL;
-    CCActionInterval* swimAction = NULL;
+    CCActionInterval* swimAction = NULL;    
+    bool isKicking = m_player->getActionByTag(BCKickAnimationTag) != NULL;    
+   
 	
-	if (!isWalking) {
+	if (!isWalking  && !isKicking) {
+        // if is not already walking or kicking, create swim animation
         swimAction = this->getAnimateFrameRange(location, length, BCSwimAnimationTime, true, false);
 		swimAction->setTag(BCSwimAnimationTag);
 	} else {
@@ -162,3 +176,13 @@ void HelloWorld::playSwimAnimation()
     
     m_player->runAction(sequence);
 }
+
+void HelloWorld::playKickAnimation(){
+    m_player->stopActionByTag(BCSwimAnimationTag);
+    
+    CCActionInterval *animation = this->getAnimateFrameRange(4, 7, BCKickAnimationTime, false, true);
+    animation->setTag(BCKickAnimationTag);
+    
+    m_player->runAction(animation);
+}
+
