@@ -112,55 +112,65 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::leftButtonAction(CCMenuItem* item)
-{
-	m_isPressedLeft = true;
-	m_isPressedRight = false;
-}
-void HelloWorld::rightButtonAction(CCMenuItem* item)
-{
-	m_isPressedLeft = false;
-	m_isPressedRight = true;
-}
 void HelloWorld::setupJoystick()
-{
-    
-    CCMenu* pMenu = NULL;
-    
+{    
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
         CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+   
+    m_leftItem = CCSprite::create("joystick_left_button.png");
+    m_rightItem = CCSprite::create("joystick_right_button.png");
     
-    // add a "close" icon to exit the progress. it's an autorelease object
-    CCMenuItemImage *leftItem = CCMenuItemImage::create(
-                                                          "joystick_left_button.png",
-                                                          "joystick_left_button.png",
-                                                          this,
-                                                          menu_selector(HelloWorld::leftButtonAction));
+	m_rightItem->setPosition(ccp(origin.x + visibleSize.width - m_rightItem->getContentSize().width/2 ,
+                                origin.y + m_rightItem->getContentSize().height/2));
+    m_leftItem->setPosition(ccp(m_rightItem->getPosition().x - m_rightItem->getContentSize().width ,
+                               origin.y + m_rightItem->getContentSize().height/2));
     
-    CCMenuItemImage *rightItem = CCMenuItemImage::create(
-                                                        "joystick_right_button.png",
-                                                        "joystick_right_button.png",
-                                                        this,
-                                                        menu_selector(HelloWorld::rightButtonAction));
+
     
-	rightItem->setPosition(ccp(origin.x + visibleSize.width - rightItem->getContentSize().width/2 ,
-                                origin.y + rightItem->getContentSize().height/2));
-    leftItem->setPosition(ccp(rightItem->getPosition().x - rightItem->getContentSize().width ,
-                               origin.y + rightItem->getContentSize().height/2));
+    this->addChild(m_leftItem, 1);
+    this->addChild(m_rightItem, 1);
+}
+
+void HelloWorld::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent)
+{
+    for(CCSetIterator it = pTouches->begin(); it != pTouches->end(); it++)
+    {
+        CCTouch* touch = (CCTouch*)(*it);
+        if(touch == NULL)
+            break;
+
+        CCDirector* director = CCDirector::sharedDirector();
+        CCPoint p = touch->getLocationInView();
+        
+        CCPoint touchPosition = director->convertToGL(p);
+        
+
+        CCSize size =  m_rightItem->getContentSize();
+        CCPoint position = m_rightItem->getPosition();
+        CCRect rect = CCRectMake(position.x - size.width/2, position.y - size.height/2, size.width, size.height);
+        
+        m_isPressedRight = rect.containsPoint(touchPosition);
+        
+        if(!m_isPressedRight) {
+            CCSize size =  m_leftItem->getContentSize();
+            CCPoint position = m_leftItem->getPosition();
+            CCRect rect = CCRectMake(position.x - size.width/2, position.y - size.height/2, size.width, size.height);
+            m_isPressedLeft = rect.containsPoint(touchPosition);
+        }
+
+        
+       
+    }
     
-    // create menu, it's an autorelease object
-    pMenu = CCMenu::create(rightItem, leftItem, NULL);
-    pMenu->setPosition(CCPointZero);
-    
-    this->addChild(pMenu, 1);
+    //m_isPressedLeft = m_leftItem->co
+
 }
 
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
-    this->playKickAnimation();
+    if(!m_isPressedLeft && !m_isPressedRight)
+        this->playKickAnimation();
+    m_isPressedRight = m_isPressedLeft = false;
 }
 
 void HelloWorld::updatePlayer(float dTime)

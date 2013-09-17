@@ -13,6 +13,9 @@ class HelloWorld : public cocos2d::CCLayer
     bool m_isPressedLeft;
     bool m_isPressedRight;
     
+    cocos2d::CCSprite *m_leftItem;
+    cocos2d::CCSprite *m_rightItem;
+    
     cocos2d::CCActionInterval* getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame);
     
     void addTarget();
@@ -29,10 +32,6 @@ class HelloWorld : public cocos2d::CCLayer
     
     void setupJoystick();
     
-    void leftButtonAction(cocos2d::CCMenuItem* item);
-    void rightButtonAction(cocos2d::CCMenuItem* item);
-    
-    
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
@@ -40,8 +39,9 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::CCScene* scene();
     
-    // override touche related method...
+    // override touches related method...
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
+    void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
