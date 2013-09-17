@@ -10,6 +10,11 @@ const float BCKickAnimationTime = 0.5;
 
 const float BCMaxVelocity = 80.0f;
 
+///** MOVEMENT CONST. */
+
+const float BCAcceleration = 2.0;
+const float BCFrictionMod = 0.95;
+
 
 
 CCScene* HelloWorld::scene()
@@ -40,24 +45,15 @@ bool HelloWorld::init()
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-                                        "CloseNormal.png",
-                                        "CloseSelected.png",
-                                        this,
-                                        menu_selector(HelloWorld::menuCloseCallback));
     
-	pCloseItem->setPosition(ccp(origin.x + visibleSize.width - pCloseItem->getContentSize().width/2 ,
-                                origin.y + pCloseItem->getContentSize().height/2));
+    
+    /////////////////////////////
+    // 2. add your codes below...+
+    
+    this->setupJoystick();
 
-    // create menu, it's an autorelease object
-    CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-    pMenu->setPosition(CCPointZero);
-    this->addChild(pMenu, 1);
+    
 
     /////////////////////////////
     // 3. add your codes below...
@@ -107,8 +103,6 @@ bool HelloWorld::init()
     // Enable touches for actions
     this->setTouchEnabled(true);
     
-    this->setAccelerometerEnabled(true);
-    
     this->schedule( schedule_selector(HelloWorld::gameLogic), 1.0 );
     
     this->schedule( schedule_selector(HelloWorld::updatePlayer), 0.1);
@@ -116,6 +110,52 @@ bool HelloWorld::init()
     m_speed = 0.0f;
     
     return true;
+}
+
+void HelloWorld::leftButtonAction(CCMenuItem* item)
+{
+	m_isPressedLeft = true;
+	m_isPressedRight = false;
+}
+void HelloWorld::rightButtonAction(CCMenuItem* item)
+{
+	m_isPressedLeft = false;
+	m_isPressedRight = true;
+}
+void HelloWorld::setupJoystick()
+{
+    
+    CCMenu* pMenu = NULL;
+    
+    CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+        CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
+    /////////////////////////////
+    // 2. add a menu item with "X" image, which is clicked to quit the program
+    //    you may modify it.
+    
+    // add a "close" icon to exit the progress. it's an autorelease object
+    CCMenuItemImage *leftItem = CCMenuItemImage::create(
+                                                          "joystick_left_button.png",
+                                                          "joystick_left_button.png",
+                                                          this,
+                                                          menu_selector(HelloWorld::leftButtonAction));
+    
+    CCMenuItemImage *rightItem = CCMenuItemImage::create(
+                                                        "joystick_right_button.png",
+                                                        "joystick_right_button.png",
+                                                        this,
+                                                        menu_selector(HelloWorld::rightButtonAction));
+    
+	rightItem->setPosition(ccp(origin.x + visibleSize.width - rightItem->getContentSize().width/2 ,
+                                origin.y + rightItem->getContentSize().height/2));
+    leftItem->setPosition(ccp(rightItem->getPosition().x - rightItem->getContentSize().width ,
+                               origin.y + rightItem->getContentSize().height/2));
+    
+    // create menu, it's an autorelease object
+    pMenu = CCMenu::create(rightItem, leftItem, NULL);
+    pMenu->setPosition(CCPointZero);
+    
+    this->addChild(pMenu, 1);
 }
 
 
@@ -133,11 +173,6 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     this->playKickAnimation();
 }
-//#pragma mark BCAccelerometerInput () <UIAccelerometerDelegate>
-void HelloWorld::didAccelerate(CCAcceleration* pAccelerationValue)
-{
-	m_speed = (float)pAccelerationValue->x * BCMaxVelocity;
-}
 
 void HelloWorld::updatePlayer(float dTime)
 {
@@ -145,6 +180,28 @@ void HelloWorld::updatePlayer(float dTime)
     CCPoint position = m_player->getPosition();
     CCSize playerSize = m_player->getContentSize();
     float leftX = position.x - playerSize.width / 2;
+    
+    
+    // slow down based on friction modifier
+	m_speed *= BCFrictionMod;
+	
+	//calculate the speed, based on the pressed keys.
+	if (m_isPressedRight) {
+		m_speed += BCAcceleration;
+		m_speed = MIN(m_speed, BCMaxVelocity);
+	}
+	
+	if (m_isPressedLeft) {
+		m_speed -= BCAcceleration;
+		m_speed = MAX(m_speed, -BCMaxVelocity);
+	}
+	
+	if (m_speed == 0.0)
+        return;
+		
+    
+    
+    
 	if (leftX > winSize.width)
 		// if it's outside right limit of the screen, make it appear from the left size
 		m_player->setPosition(ccp(-playerSize.width/2, position.y));
@@ -163,6 +220,8 @@ void HelloWorld::updatePlayer(float dTime)
         }
 	}
 }
+
+
 
 
 

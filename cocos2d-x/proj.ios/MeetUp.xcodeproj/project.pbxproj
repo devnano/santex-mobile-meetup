@@ -226,6 +226,9 @@
 		DA8AA0E217E8E39B00F636ED /* bubble_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DC17E8E39B00F636ED /* bubble_yellow.png */; };
 		DA8AA0E317E8E39B00F636ED /* bubble_energy.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DD17E8E39B00F636ED /* bubble_energy.png */; };
 		DA8AA0E417E8E39B00F636ED /* bubble_translucent.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DE17E8E39B00F636ED /* bubble_translucent.png */; };
+		DAE978B417E8FA4A00B59A8C /* joystick_action_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE978B117E8FA4A00B59A8C /* joystick_action_button.png */; };
+		DAE978B517E8FA4A00B59A8C /* joystick_left_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE978B217E8FA4A00B59A8C /* joystick_left_button.png */; };
+		DAE978B617E8FA4A00B59A8C /* joystick_right_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE978B317E8FA4A00B59A8C /* joystick_right_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -672,6 +675,9 @@
 		DA8AA0DC17E8E39B00F636ED /* bubble_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_yellow.png; sourceTree = "<group>"; };
 		DA8AA0DD17E8E39B00F636ED /* bubble_energy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_energy.png; sourceTree = "<group>"; };
 		DA8AA0DE17E8E39B00F636ED /* bubble_translucent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_translucent.png; sourceTree = "<group>"; };
+		DAE978B117E8FA4A00B59A8C /* joystick_action_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_action_button.png; sourceTree = "<group>"; };
+		DAE978B217E8FA4A00B59A8C /* joystick_left_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_left_button.png; sourceTree = "<group>"; };
+		DAE978B317E8FA4A00B59A8C /* joystick_right_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joystick_right_button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1492,6 +1498,9 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAE978B117E8FA4A00B59A8C /* joystick_action_button.png */,
+				DAE978B217E8FA4A00B59A8C /* joystick_left_button.png */,
+				DAE978B317E8FA4A00B59A8C /* joystick_right_button.png */,
 				DA8AA0D917E8E39B00F636ED /* bubble_blue.png */,
 				DA8AA0DA17E8E39B00F636ED /* bubble_green.png */,
 				DA8AA0DB17E8E39B00F636ED /* bubble_red.png */,
@@ -1607,6 +1616,9 @@
 				DA8AA0E217E8E39B00F636ED /* bubble_yellow.png in Resources */,
 				DA8AA0E317E8E39B00F636ED /* bubble_energy.png in Resources */,
 				DA8AA0E417E8E39B00F636ED /* bubble_translucent.png in Resources */,
+				DAE978B417E8FA4A00B59A8C /* joystick_action_button.png in Resources */,
+				DAE978B517E8FA4A00B59A8C /* joystick_left_button.png in Resources */,
+				DAE978B617E8FA4A00B59A8C /* joystick_right_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

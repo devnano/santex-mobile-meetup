@@ -10,6 +10,9 @@ class HelloWorld : public cocos2d::CCLayer
     
     float m_speed;
     
+    bool m_isPressedLeft;
+    bool m_isPressedRight;
+    
     cocos2d::CCActionInterval* getAnimateFrameRange(int location, int len, float duration, bool pingPong, bool restoreOriginalFrame);
     
     void addTarget();
@@ -24,6 +27,11 @@ class HelloWorld : public cocos2d::CCLayer
     
     const char *randomTargetName();
     
+    void setupJoystick();
+    
+    void leftButtonAction(cocos2d::CCMenuItem* item);
+    void rightButtonAction(cocos2d::CCMenuItem* item);
+    
     
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -37,8 +45,6 @@ public:
     
     // override touche related method...
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
-    
-    void didAccelerate(cocos2d::CCAcceleration* pAccelerationValue);
     
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
