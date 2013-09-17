@@ -141,14 +141,17 @@ void HelloWorld::didAccelerate(CCAcceleration* pAccelerationValue)
 
 void HelloWorld::updatePlayer(float dTime)
 {
+    CCSize winSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint position = m_player->getPosition();
-//	if (this->getBottomLeftPointInWorld().x > screenBounds().size.width)
-//		// if it's outside right limit of the screen, make it appear from the left size
-//		this->setPosition(ccp(-getSize().width/2, position->y));
-//	else if (this->getBottomLeftPointInWorld().x + getSize().width < 0)
-//		// if it's outside left limit of the screen, make it appear from the right side
-//		this->setPosition(ccp(screenBounds().size.width + getSize().width/2, getPosition().y));
-//	else {
+    CCSize playerSize = m_player->getContentSize();
+    float leftX = position.x - playerSize.width / 2;
+	if (leftX > winSize.width)
+		// if it's outside right limit of the screen, make it appear from the left size
+		m_player->setPosition(ccp(-playerSize.width/2, position.y));
+	else if (leftX + playerSize.width < 0)
+		// if it's outside left limit of the screen, make it appear from the right side
+		m_player->setPosition(ccp(winSize.width + playerSize.width/2, position.y));
+	else {
 		// otherwise perform normal movement
         CCFiniteTimeAction* move = CCMoveTo::create(0.1,  ccp(position.x + m_speed, position.y));
         // CCFiniteTimeAction* two = CCCallFunc::create(delegate, selector);
@@ -158,7 +161,7 @@ void HelloWorld::updatePlayer(float dTime)
 		if (flip != m_player->isFlipX()) {			
             m_player->setFlipX(flip);
         }
-//	}
+	}
 }
 
 
