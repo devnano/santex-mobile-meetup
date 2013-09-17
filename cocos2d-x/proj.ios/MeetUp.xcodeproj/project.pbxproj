@@ -220,6 +220,12 @@
 		DA8AA0C317E8A60400F636ED /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0C217E8A60400F636ED /* background.png */; };
 		DA8AA0D317E8AAB800F636ED /* octopus.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0D117E8AAB800F636ED /* octopus.png */; };
 		DA8AA0D717E8D0EE00F636ED /* octopus.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0D617E8D0EE00F636ED /* octopus.plist */; };
+		DA8AA0DF17E8E39B00F636ED /* bubble_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0D917E8E39B00F636ED /* bubble_blue.png */; };
+		DA8AA0E017E8E39B00F636ED /* bubble_green.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DA17E8E39B00F636ED /* bubble_green.png */; };
+		DA8AA0E117E8E39B00F636ED /* bubble_red.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DB17E8E39B00F636ED /* bubble_red.png */; };
+		DA8AA0E217E8E39B00F636ED /* bubble_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DC17E8E39B00F636ED /* bubble_yellow.png */; };
+		DA8AA0E317E8E39B00F636ED /* bubble_energy.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DD17E8E39B00F636ED /* bubble_energy.png */; };
+		DA8AA0E417E8E39B00F636ED /* bubble_translucent.png in Resources */ = {isa = PBXBuildFile; fileRef = DA8AA0DE17E8E39B00F636ED /* bubble_translucent.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -660,6 +666,12 @@
 		DA8AA0C217E8A60400F636ED /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		DA8AA0D117E8AAB800F636ED /* octopus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = octopus.png; sourceTree = "<group>"; };
 		DA8AA0D617E8D0EE00F636ED /* octopus.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = octopus.plist; sourceTree = "<group>"; };
+		DA8AA0D917E8E39B00F636ED /* bubble_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_blue.png; sourceTree = "<group>"; };
+		DA8AA0DA17E8E39B00F636ED /* bubble_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_green.png; sourceTree = "<group>"; };
+		DA8AA0DB17E8E39B00F636ED /* bubble_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_red.png; sourceTree = "<group>"; };
+		DA8AA0DC17E8E39B00F636ED /* bubble_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_yellow.png; sourceTree = "<group>"; };
+		DA8AA0DD17E8E39B00F636ED /* bubble_energy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_energy.png; sourceTree = "<group>"; };
+		DA8AA0DE17E8E39B00F636ED /* bubble_translucent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble_translucent.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1480,6 +1492,12 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA8AA0D917E8E39B00F636ED /* bubble_blue.png */,
+				DA8AA0DA17E8E39B00F636ED /* bubble_green.png */,
+				DA8AA0DB17E8E39B00F636ED /* bubble_red.png */,
+				DA8AA0DC17E8E39B00F636ED /* bubble_yellow.png */,
+				DA8AA0DD17E8E39B00F636ED /* bubble_energy.png */,
+				DA8AA0DE17E8E39B00F636ED /* bubble_translucent.png */,
 				DA8AA0D617E8D0EE00F636ED /* octopus.plist */,
 				DA8AA0D117E8AAB800F636ED /* octopus.png */,
 				DA8AA0C217E8A60400F636ED /* background.png */,
@@ -1583,6 +1601,12 @@
 				DA8AA0C317E8A60400F636ED /* background.png in Resources */,
 				DA8AA0D317E8AAB800F636ED /* octopus.png in Resources */,
 				DA8AA0D717E8D0EE00F636ED /* octopus.plist in Resources */,
+				DA8AA0DF17E8E39B00F636ED /* bubble_blue.png in Resources */,
+				DA8AA0E017E8E39B00F636ED /* bubble_green.png in Resources */,
+				DA8AA0E117E8E39B00F636ED /* bubble_red.png in Resources */,
+				DA8AA0E217E8E39B00F636ED /* bubble_yellow.png in Resources */,
+				DA8AA0E317E8E39B00F636ED /* bubble_energy.png in Resources */,
+				DA8AA0E417E8E39B00F636ED /* bubble_translucent.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

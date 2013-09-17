@@ -105,6 +105,8 @@ bool HelloWorld::init()
     // Enable touches for actions
     this->setTouchEnabled(true);
     
+    this->schedule( schedule_selector(HelloWorld::gameLogic), 1.0 );
+    
     return true;
 }
 
@@ -122,6 +124,70 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 {
     this->playKickAnimation();
+}
+
+void HelloWorld::gameLogic(float dt)
+{
+	this->addTarget();
+}
+
+const char *HelloWorld::randomTargetName()
+{
+    
+    int i = ( rand() % 6) + (int)0;
+    const char *name = "bubble_translucent.png";
+    switch (i) {
+        case 0:
+            name = "bubble_blue.png";
+            break;
+        case 1:
+            name = "bubble_green.png";
+            break;
+        case 2:
+            name = "bubble_red.png";
+            break;
+        case 3:
+            name = "bubble_yellow.png";
+            break;
+        case 4:
+            name = "bubble_energy.png";
+            break;
+    }
+    
+    return name;
+}
+
+// cpp with cocos2d-x
+void HelloWorld::addTarget()
+{
+    const char *name = this->randomTargetName();
+	CCSprite *target = CCSprite::create(name, CCRectMake(0,0,32,32) );
+    
+	// Determine where to spawn the target along the X axis
+	CCSize winSize = CCDirector::sharedDirector()->getVisibleSize();
+	float minX = target->getContentSize().width/2;
+	float maxX = winSize.width -  target->getContentSize().width/2;
+	int rangeX = (int)(maxX - minX);
+	// srand( TimGetTicks() );
+	int actualX = ( rand() % rangeX ) + (int)minX;
+    
+	// Create the target slightly off-screen along the top edge,
+	// and along a random position along the X axis as calculated
+	target->setPosition(ccp(CCDirector::sharedDirector()->getVisibleOrigin().x + actualX, winSize.height + (target->getContentSize().height/2)));
+	this->addChild(target);
+    
+	// Determine speed of the target
+	int minDuration = (int)3.0;
+	int maxDuration = (int)6.0;
+	int rangeDuration = maxDuration - minDuration;
+	// srand( TimGetTicks() );
+	int actualDuration = ( rand() % rangeDuration ) + minDuration;
+    
+	// Create the actions
+	CCFiniteTimeAction* actionMove = CCMoveTo::create( (float)actualDuration,
+                                                      ccp(actualX, 0 - target->getContentSize().height/2));
+
+	target->runAction( CCSequence::create(actionMove, CCDelayTime::create(0.0), NULL) );
 }
 
 // Get CCActionInterval given a set of frames, duration, animation name...
