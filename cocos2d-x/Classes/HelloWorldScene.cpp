@@ -1,4 +1,6 @@
 #include "HelloWorldScene.h"
+// remove this line to produce an accelerometer based input
+#define JOYSTICK
 
 USING_NS_CC;
 
@@ -50,8 +52,9 @@ bool HelloWorld::init()
     
     /////////////////////////////
     // 2. add your codes below...+
-    
+#ifdef JOYSTICK
     this->setupJoystick();
+#endif
 
     
 
@@ -92,6 +95,9 @@ bool HelloWorld::init()
     
     // Enable touches for actions
     this->setTouchEnabled(true);
+#ifndef JOYSTICK
+    this->setAccelerometerEnabled(true);
+#endif
     
     this->schedule( schedule_selector(HelloWorld::gameLogic), 1.0 );
     
@@ -106,6 +112,13 @@ bool HelloWorld::init()
     
     return true;
 }
+
+//#pragma mark BCAccelerometerInput () <UIAccelerometerDelegate>
+void HelloWorld::didAccelerate(CCAcceleration* pAccelerationValue)
+{
+	m_speed = (float)pAccelerationValue->x * BCMaxVelocity;
+}
+
 
 void HelloWorld::setupJoystick()
 {    
@@ -175,6 +188,7 @@ void HelloWorld::updatePlayer(float dTime)
     CCSize playerSize = m_player->getContentSize();
     float leftX = position.x - playerSize.width / 2;
     
+#ifdef JOYSTICK    
     
     // slow down based on friction modifier
 	m_speed *= BCFrictionMod;
@@ -189,7 +203,7 @@ void HelloWorld::updatePlayer(float dTime)
 		m_speed -= BCAcceleration;
 		m_speed = MAX(m_speed, -BCMaxVelocity);
 	}
-	
+#endif
 	if (m_speed == 0.0)
         return;
 		

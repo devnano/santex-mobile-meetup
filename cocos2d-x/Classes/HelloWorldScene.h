@@ -50,6 +50,8 @@ public:
     void ccTouchesEnded(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     void ccTouchesBegan(cocos2d::CCSet* touches, cocos2d::CCEvent* event);
     
+    void didAccelerate(cocos2d::CCAcceleration* pAccelerationValue);
+    
     // implement the "static node()" method manually
     CREATE_FUNC(HelloWorld);
 };
