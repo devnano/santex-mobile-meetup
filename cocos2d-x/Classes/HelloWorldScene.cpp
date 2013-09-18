@@ -106,6 +106,11 @@ bool HelloWorld::init()
     this->schedule( schedule_selector(HelloWorld::gameLogic), 1.0 );
     
     this->schedule( schedule_selector(HelloWorld::updatePlayer), 0.1);
+
+    // schedule the selector to check player-targets collisions 
+    this->schedule( schedule_selector(HelloWorld::updateGame) );
+    
+    m_targets = new CCArray;
     
     m_speed = 0.0f;
     
@@ -229,6 +234,41 @@ void HelloWorld::gameLogic(float dt)
 	this->addTarget();
 }
 
+void HelloWorld::updateGame(float dt)
+{
+    // given the current Player's Rect, check collisions with all targets falling on the screen
+    CCSize playerSize = m_player->getContentSize();
+    CCPoint playerPosition = m_player->getPosition();
+    CCRect playerRect = CCRectMake(playerPosition.x - playerSize.width/2, playerPosition.y - playerSize.height / 2, playerSize.width, playerSize.height);
+    CCArray* targetsToDelete =new CCArray;
+    CCObject* jt = NULL;
+    
+    CCARRAY_FOREACH(m_targets, jt)
+    {
+        CCSprite *target = dynamic_cast<CCSprite*>(jt);
+        CCRect targetRect = CCRectMake(
+                                       target->getPosition().x - (target->getContentSize().width/2),
+                                       target->getPosition().y - (target->getContentSize().height/2),
+                                       target->getContentSize().width,
+                                       target->getContentSize().height);
+        
+        // if (CCRect::CCRectIntersectsRect(projectileRect, targetRect))
+        if (playerRect.intersectsRect(targetRect))
+        {
+            // collision here...
+            targetsToDelete->addObject(target);
+        }
+    }
+    
+    CCARRAY_FOREACH(targetsToDelete, jt)
+    {
+        // remove all the targets caught...
+        CCSprite *target = dynamic_cast<CCSprite*>(jt);
+        m_targets->removeObject(target);
+        this->removeChild(target, true);
+    }
+}
+
 const char *HelloWorld::randomTargetName()
 {
     
@@ -284,8 +324,19 @@ void HelloWorld::addTarget()
 	// Create the actions
 	CCFiniteTimeAction* actionMove = CCMoveTo::create( (float)actualDuration,
                                                       ccp(actualX, 0 - target->getContentSize().height/2));
+    
+    CCFiniteTimeAction* actionMoveDone = CCCallFuncN::create( this,
+                                                             callfuncN_selector(HelloWorld::targetMoveFinished));
 
-	target->runAction( CCSequence::create(actionMove, CCDelayTime::create(0.0), NULL) );
+    // add a final selector call to remove the target from m_targets array...
+	target->runAction( CCSequence::create(actionMove, actionMoveDone, NULL) );
+    
+    m_targets->addObject(target);
+}
+
+void HelloWorld::targetMoveFinished(CCNode* sender)
+{
+    m_targets->removeObject(sender);
 }
 
 // Get CCActionInterval given a set of frames, duration, animation name...
