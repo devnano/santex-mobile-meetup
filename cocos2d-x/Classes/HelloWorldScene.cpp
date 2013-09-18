@@ -257,6 +257,7 @@ void HelloWorld::updateGame(float dt)
         {
             // collision here...
             targetsToDelete->addObject(target);
+            CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("splash.mp3");
         }
     }
     
@@ -337,6 +338,7 @@ void HelloWorld::addTarget()
 void HelloWorld::targetMoveFinished(CCNode* sender)
 {
     m_targets->removeObject(sender);
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("splash.mp3");
 }
 
 // Get CCActionInterval given a set of frames, duration, animation name...
@@ -399,5 +401,6 @@ void HelloWorld::playKickAnimation(){
     animation->setTag(BCKickAnimationTag);
     
     m_player->runAction(animation);
+    CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("kick.mp3");
 }
 
