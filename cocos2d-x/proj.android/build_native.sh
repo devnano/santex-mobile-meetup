@@ -1,4 +1,5 @@
 APPNAME="MeetUp"
+NDK_ROOT=/Users/marianoheredia/Kartjuba/Android/android-ndk-r9
 
 # options
 
@@ -37,7 +38,7 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # ... use paths relative to current directory
-COCOS2DX_ROOT="$DIR/../../.."
+COCOS2DX_ROOT="$DIR/../cocos2d-x"
 APP_ROOT="$DIR/.."
 APP_ANDROID_ROOT="$DIR"
 

@@ -1,0 +1,9 @@
+1. Install ADT
+2. Install Programming Languages / C/C++ Development Tools in ADT -> Help -> Install New Software
+3. Download Android NDK: http://developer.android.com/tools/sdk/ndk/index.html
+4. Extract Android NDK in a local path. That local path will be NDK_HOME
+5. Edit proj.android/build_native.sh NDK_HOME variable to point to your NDK_HOME local path
+6. Import proj.android into ADT workspace
+7. On ADT create CC2DX_HOME variable to point to YOUR_LOCAL_PATH/MeetUp/cocos2d-x/cocos2d-x
+8. Add a Linked source folder  to project's Java Build Path -> Linke folder location CC2DX_HOME/cocos2dx/platform/android/java/src Folder name:cocos2dx src
+
