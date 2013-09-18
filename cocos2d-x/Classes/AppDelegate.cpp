@@ -17,6 +17,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     CCEGLView* pEGLView = CCEGLView::sharedOpenGLView();
 
     pDirector->setOpenGLView(pEGLView);
+    
+    // Set the design resolution
+    pEGLView->setDesignResolutionSize(480, 320, kResolutionNoBorder);
 	
     // turn on display FPS
     pDirector->setDisplayStats(true);

@@ -58,18 +58,6 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    CCLabelTTF* pLabel = CCLabelTTF::create("Hello World", "Arial", 24);
-    
-    // position the label on the center of the screen
-    pLabel->setPosition(ccp(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - pLabel->getContentSize().height));
-
-    // add the label as a child to this layer
-    this->addChild(pLabel, 1);
-
     // add "HelloWorld" splash screen"
     CCSprite* pSprite = CCSprite::create("background.png");
 
@@ -83,6 +71,8 @@ bool HelloWorld::init()
     CCSpriteBatchNode *playerBatchNode = CCSpriteBatchNode::create("octopus.png");
     
     this->addChild(playerBatchNode);
+    
+   // pSprite->setContentSize(visibleSize);
 
     // Save player sprite frames into cache 
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("octopus.plist");
